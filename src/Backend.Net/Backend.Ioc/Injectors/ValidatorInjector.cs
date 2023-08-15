@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Backend.Application.Validators.MestresPokemon;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Backend.Ioc.Injectors;
 
@@ -6,6 +7,8 @@ public static class ValidatorInjector
 {
     public static IServiceCollection AddValidatorsInjector(this IServiceCollection services)
     {
-        return services;
+        return services
+            .AddScoped<AdicionarMestrePokemonRequestValidator, AdicionarMestrePokemonRequestValidator>()
+            .AddScoped<AtualizarMestrePokemonRequestValidator, AtualizarMestrePokemonRequestValidator>();
     }
 }

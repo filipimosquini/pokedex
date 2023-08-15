@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Extensions.FluentValidation.Br" Version="1.0.2" />
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Configurations\Bases\" />
+    <Folder Include="Services\" />
+    <Folder Include="Validators\MestresPokemon\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.CrossCutting\Backend.CrossCutting.csproj" />
     <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj" />
   </ItemGroup>
 

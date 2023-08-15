@@ -24,7 +24,8 @@ builder.Services
     .AddDbContextInjector(builder.Configuration)
     .AddRepositoriesInjector()
     .AddServicesInjector()
-    .AddApplicationServicesInjector();
+    .AddApplicationServicesInjector()
+    .AddValidatorsInjector();
 
 builder.Services
     .AddingHttpClient()

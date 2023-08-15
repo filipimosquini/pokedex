@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Clients\http\" />
+    <Folder Include="Expressions\" />
   </ItemGroup>
 
   <ItemGroup>

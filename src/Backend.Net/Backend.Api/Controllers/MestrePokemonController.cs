@@ -1,23 +1,81 @@
-﻿using Backend.Domain.Services;
+﻿using Backend.Api.Bases;
+using Backend.Application.Configurations;
+using Backend.Application.Validators.MestresPokemon;
+using Backend.Domain.ApplicationServices.MestresPokemons;
+using Backend.Domain.AppplicationServices.MestresPokemons.Requests;
+using Backend.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Api.Controllers;
 
 [ApiController]
 [Route("mestres")]
-public class MestrePokemonController : ControllerBase
+public class MestrePokemonController : MainController
 {
-    
-    private readonly IMestrePokemonService _mestrePokemonService;
+    private readonly IMestrePokemonApplicationService _applicationService;
+    private readonly AdicionarMestrePokemonRequestValidator _adicionarMestrePokemonRequestValidator;
+    private readonly AtualizarMestrePokemonRequestValidator _atualizarMestrePokemonRequestValidator;
 
-    public MestrePokemonController(IMestrePokemonService mestrePokemonService)
+    public MestrePokemonController(IMestrePokemonApplicationService applicationService, 
+        AdicionarMestrePokemonRequestValidator adicionarMestrePokemonRequestValidator, 
+        AtualizarMestrePokemonRequestValidator atualizarMestrePokemonRequestValidator)
     {
-        _mestrePokemonService = mestrePokemonService;
+        _applicationService = applicationService;
+        _adicionarMestrePokemonRequestValidator = adicionarMestrePokemonRequestValidator;
+        _atualizarMestrePokemonRequestValidator = atualizarMestrePokemonRequestValidator;
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> AdicionarAsync([FromBody] AdicionarMestrePokemonRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return CustomResponseError(ModelState);
+        }
+
+        var validateResult = _adicionarMestrePokemonRequestValidator.Validate(request);
+        if (validateResult.IsValid)
+        {
+            return CustomResponse((CustomValidationResult)await _applicationService.AdicionarAsync(request));
+        }
+
+        return CustomResponseError(validateResult);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> AtualizarAsync([FromBody] AtualizarMestrePokemonRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return CustomResponseError(ModelState);
+        }
+
+        var validateResult = _atualizarMestrePokemonRequestValidator.Validate(request);
+        if (validateResult.IsValid)
+        {
+            return CustomResponse((CustomValidationResult)await _applicationService.AtualizarAsync(request));
+        }
+
+        return CustomResponseError(validateResult);
     }
 
     [HttpGet]
-    public async Task<IActionResult> ListarAsync()
+    [ProducesResponseType(typeof(IEnumerable<MestrePokemon>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ListarAsync([FromQuery] FiltroMestrePokemonRequest request)
     {
-        return Ok(await _mestrePokemonService.ListarAsync());
+        return Ok(await _applicationService.ListarAsync(request));
+    }
+
+    [HttpGet("{:id}")]
+    [ProducesResponseType(typeof(MestrePokemon), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> OberAsync(string id)
+    {
+        return Ok(await _applicationService.ObterAsync(id));
     }
 }

@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using System.Data.Common;
 using Backend.Domain.Models;
+using Backend.Domain.Bases.Repositories;
 
 namespace Backend.Infra.Contexts;
 
-public class PokedexContext : DbContext
+public class PokedexContext : DbContext, IUnitOfWork
 {
     private readonly IConfiguration _configuration;
 

@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Models;
+﻿using System.Linq.Expressions;
+using Backend.Domain.Models;
 using Backend.Domain.Repositories;
 using Backend.Infra.Bases;
 using Backend.Infra.Contexts;
@@ -14,6 +15,15 @@ public class MestrePokemonRepository : BaseRepository<MestrePokemon>, IMestrePok
         _context = context;
     }
 
-    public async Task<IEnumerable<MestrePokemon>> ListarAsync()
-        => await _context.MestresPokemon.ToListAsync();
+    public async Task<MestrePokemon> ObterAsync(Expression<Func<MestrePokemon, bool>> filtros)
+        => await _context.MestresPokemon
+            //.Include(x => x.Pokemons)
+            .FirstOrDefaultAsync(filtros);
+
+    public async Task<IEnumerable<MestrePokemon>> ListarAsync(Expression<Func<MestrePokemon, bool>> filtros)
+        => await _context.MestresPokemon
+            .AsNoTracking()
+            //.Include(x => x.Pokemons)
+            .Where(filtros)
+            .ToListAsync();
 }
