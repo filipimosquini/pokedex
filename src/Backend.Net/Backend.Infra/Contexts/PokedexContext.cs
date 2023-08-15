@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using System.Data.Common;
+using Backend.Domain.Models;
 
 namespace Backend.Infra.Contexts;
 
@@ -15,6 +16,10 @@ public class PokedexContext : DbContext
     {
         _configuration = configuration;
     }
+
+    public DbSet<Pokemon> Pokemons { get; set; }
+    public DbSet<MestrePokemon> MestresPokemon { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)

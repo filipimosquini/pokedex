@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.Ioc", "..\Backend.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.CrossCutting", "..\Backend.CrossCutting\Backend.CrossCutting.csproj", "{0B67D44E-8B99-4A40-92BA-30E204F1A501}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Application", "..\Backend.Application\Backend.Application.csproj", "{7712633F-618A-47A8-BD8A-AFD9B16C3C01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0B67D44E-8B99-4A40-92BA-30E204F1A501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B67D44E-8B99-4A40-92BA-30E204F1A501}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B67D44E-8B99-4A40-92BA-30E204F1A501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7712633F-618A-47A8-BD8A-AFD9B16C3C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7712633F-618A-47A8-BD8A-AFD9B16C3C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7712633F-618A-47A8-BD8A-AFD9B16C3C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7712633F-618A-47A8-BD8A-AFD9B16C3C01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
