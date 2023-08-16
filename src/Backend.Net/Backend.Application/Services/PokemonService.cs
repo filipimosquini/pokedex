@@ -14,7 +14,7 @@ public class PokemonService : IPokemonService
         _pokemonGateway = pokemonGateway;
     }
 
-    public async Task<IEnumerable<PokemonResponse>> ListarAsync()
+    public async Task<IEnumerable<PokemonResponse>> ListarDeFonteExternaAsync()
     {
         Random random = new Random();
         var pokemonIds = Enumerable.Range(1, 1010).OrderBy(x => random.Next()).Take(10);
@@ -23,13 +23,13 @@ public class PokemonService : IPokemonService
 
         foreach (var pokemonId in pokemonIds)
         {
-            responses.Add(await ObterAsync(pokemonId));
+            responses.Add(await ObterDeFonteExternaAsync(pokemonId));
         }
 
         return responses;
     }
 
-    public async Task<PokemonResponse> ObterAsync(int pokemonId)
+    public async Task<PokemonResponse> ObterDeFonteExternaAsync(int pokemonId)
     {
         var dadosBasicos = await _pokemonGateway.ObterPokemonAsync(pokemonId);
         var evolucoes = await ObterEvolucoesPokemon(pokemonId);

@@ -17,13 +17,13 @@ public class MestrePokemonRepository : BaseRepository<MestrePokemon>, IMestrePok
 
     public async Task<MestrePokemon> ObterAsync(Expression<Func<MestrePokemon, bool>> filtros)
         => await _context.MestresPokemon
-            //.Include(x => x.Pokemons)
+            .Include(x => x.Pokemons)
             .FirstOrDefaultAsync(filtros);
 
     public async Task<IEnumerable<MestrePokemon>> ListarAsync(Expression<Func<MestrePokemon, bool>> filtros)
         => await _context.MestresPokemon
             .AsNoTracking()
-            //.Include(x => x.Pokemons)
+            .Include(x => x.Pokemons)
             .Where(filtros)
             .ToListAsync();
 }

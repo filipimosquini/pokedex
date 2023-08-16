@@ -43,7 +43,8 @@ public static class MestrePokemonExtension
             Id = mestrePokemon.Id,
             Nome = mestrePokemon.Nome,
             Idade = mestrePokemon.Idade,
-            Cpf = mestrePokemon.CPF
+            Cpf = mestrePokemon.CPF,
+            Pokemons = mestrePokemon.Pokemons.Select(x => x.Nome).ToList() 
         };
     }
 

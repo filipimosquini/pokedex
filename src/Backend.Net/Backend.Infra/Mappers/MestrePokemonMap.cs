@@ -14,6 +14,7 @@ public class MestrePokemonMap : IEntityTypeConfiguration<MestrePokemon>
         builder
             .HasMany(x => x.Pokemons)
             .WithOne(x => x.MestrePokemon)
+            .HasForeignKey(x => x.MestrePokemonId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

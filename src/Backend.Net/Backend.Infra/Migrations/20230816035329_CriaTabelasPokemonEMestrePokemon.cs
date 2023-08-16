@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Backend.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class CriaTabelasPokemonEMestrePokemon : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +14,7 @@ namespace Backend.Infra.Migrations
                 name: "mestre_pokemon",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", nullable: false),
                     Idade = table.Column<int>(type: "INTEGER", nullable: false),
                     CPF = table.Column<string>(type: "TEXT", nullable: false)
@@ -26,17 +25,19 @@ namespace Backend.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pokemon",
+                name: "pokemon",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    MestrePokemonId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    PokemonId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    MestrePokemonId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pokemon", x => x.Id);
+                    table.PrimaryKey("PK_pokemon", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pokemon_mestre_pokemon_MestrePokemonId",
+                        name: "FK_pokemon_mestre_pokemon_MestrePokemonId",
                         column: x => x.MestrePokemonId,
                         principalTable: "mestre_pokemon",
                         principalColumn: "Id",
@@ -44,8 +45,8 @@ namespace Backend.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pokemon_MestrePokemonId",
-                table: "Pokemon",
+                name: "IX_pokemon_MestrePokemonId",
+                table: "pokemon",
                 column: "MestrePokemonId");
         }
 
@@ -53,7 +54,7 @@ namespace Backend.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Pokemon");
+                name: "pokemon");
 
             migrationBuilder.DropTable(
                 name: "mestre_pokemon");

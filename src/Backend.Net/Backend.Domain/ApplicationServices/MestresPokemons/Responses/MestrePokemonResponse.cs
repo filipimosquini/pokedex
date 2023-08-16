@@ -6,4 +6,5 @@ public class MestrePokemonResponse
     public string Nome { get; set; }
     public string Cpf { get; set; }
     public int Idade { get; set; }
+    public List<string> Pokemons { get; set; }
 }

@@ -2,8 +2,8 @@
 using Backend.Application.Configurations;
 using Backend.Application.Validators;
 using Backend.Domain.ApplicationServices.MestresPokemons;
+using Backend.Domain.ApplicationServices.MestresPokemons.Responses;
 using Backend.Domain.AppplicationServices.MestresPokemons.Requests;
-using Backend.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Api.Controllers;
@@ -64,7 +64,7 @@ public class MestrePokemonController : MainController
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<MestrePokemon>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<MestrePokemonResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ListarAsync([FromQuery] FiltroMestrePokemonRequest request)
     {
@@ -72,7 +72,7 @@ public class MestrePokemonController : MainController
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(MestrePokemon), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(MestrePokemonResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> OberAsync(string id)
     {

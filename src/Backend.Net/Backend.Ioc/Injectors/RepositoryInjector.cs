@@ -8,6 +8,8 @@ public static class RepositoryInjector
 {
     public static IServiceCollection AddRepositoriesInjector(this IServiceCollection services)
     {
-        return services.AddScoped<IMestrePokemonRepository, MestrePokemonRepository>();
+        return services
+            .AddScoped<IMestrePokemonRepository, MestrePokemonRepository>()
+            .AddScoped<IPokemonRepository, PokemonRepository>();
     }
 }

@@ -36,6 +36,8 @@ public class MestrePokemonApplicationService : BaseApplicationService, IMestrePo
 
         await CommitAsync(_mestrePokemonRepository.UnitOfWork);
 
+        CustomValidationResult.Data = "Mestre Pokemon adicionado com sucesso";
+
         return CustomValidationResult;
     }
 
@@ -56,6 +58,8 @@ public class MestrePokemonApplicationService : BaseApplicationService, IMestrePo
         _mestrePokemonRepository.Update(mestrePokemon);
 
         await CommitAsync(_mestrePokemonRepository.UnitOfWork);
+
+        CustomValidationResult.Data = "Mestre Pokemon atualizado com sucesso";
 
         return CustomValidationResult;
     }
