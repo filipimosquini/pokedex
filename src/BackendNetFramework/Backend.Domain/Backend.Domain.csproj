@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,10 +30,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\Backend.Api\packages\FluentValidation.11.7.1\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Backend.Api\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +55,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationServices\MestresPokemons\IMestrePokemonApplicationService.cs" />
+    <Compile Include="ApplicationServices\MestresPokemons\Requests\AdicionarMestrePokemonRequest.cs" />
+    <Compile Include="ApplicationServices\MestresPokemons\Requests\AtualizarMestrePokemonRequest.cs" />
+    <Compile Include="ApplicationServices\MestresPokemons\Requests\FiltroMestrePokemonRequest.cs" />
+    <Compile Include="ApplicationServices\MestresPokemons\Responses\MestrePokemonResponse.cs" />
+    <Compile Include="ApplicationServices\Pokemons\IPokemonApplicationService.cs" />
+    <Compile Include="ApplicationServices\Pokemons\Requests\CapturarPokemonRequest.cs" />
+    <Compile Include="ApplicationServices\Pokemons\Responses\PokemonResponse.cs" />
+    <Compile Include="Bases\ApplicationsServices\ICustomValidationResult.cs" />
+    <Compile Include="Bases\Models\BaseModel.cs" />
+    <Compile Include="Bases\Repositories\IBaseRepository.cs" />
+    <Compile Include="Bases\Repositories\IUnitOfWork.cs" />
+    <Compile Include="Extensions\MestrePokemonExtension.cs" />
+    <Compile Include="Extensions\PokemonExtension.cs" />
+    <Compile Include="Gateways\DataTransferObjects\EvolucaoPokemon\Chain.cs" />
+    <Compile Include="Gateways\DataTransferObjects\EvolucaoPokemon\EvolucaoPokemonDto.cs" />
+    <Compile Include="Gateways\DataTransferObjects\EvolucaoPokemon\EvolvesTo.cs" />
+    <Compile Include="Gateways\DataTransferObjects\EvolucaoPokemon\Species.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Ability.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Ability2.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Animated.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\BlackWhite.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Crystal.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\DiamondPearl.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\DreamWorld.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Emerald.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\FireredLeafgreen.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Form.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GameIndex.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Generation.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationI.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationIi.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationIii.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationIv.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationV.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationVi.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationVii.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\GenerationViii.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Gold.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\HeartgoldSoulsilver.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\HeldItem.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Home.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Icons.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Item.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Move.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Move2.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\MoveLearnMethod.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\OfficialArtwork.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\OmegarubyAlphasapphire.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Other.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\PastType.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Platinum.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\PokemonDto.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\RedBlue.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\RubySapphire.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Silver.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Species.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Sprites.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Stat.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Stat2.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Type.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Type2.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\UltraSunUltraMoon.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Version.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\VersionDetail.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\VersionGroup.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\VersionGroupDetail.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Versions.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\XY.cs" />
+    <Compile Include="Gateways\DataTransferObjects\Pokemon\Yellow.cs" />
+    <Compile Include="Gateways\IPokemonGateway.cs" />
+    <Compile Include="Models\MestrePokemon.cs" />
+    <Compile Include="Models\Pokemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\MestresPokemons\FiltrarPorCpfQuery.cs" />
+    <Compile Include="Queries\MestresPokemons\FiltrarPorIdadeQuery.cs" />
+    <Compile Include="Queries\MestresPokemons\FiltrarPorIdQuery.cs" />
+    <Compile Include="Queries\MestresPokemons\FitrarPorNomeQuery.cs" />
+    <Compile Include="Queries\Pokemons\FiltrarPorIdQuery.cs" />
+    <Compile Include="Repositories\IMestrePokemonRepository.cs" />
+    <Compile Include="Repositories\IPokemonRepository.cs" />
+    <Compile Include="Services\IMestrePokemonService.cs" />
+    <Compile Include="Services\IPokemonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
