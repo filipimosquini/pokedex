@@ -1,6 +1,6 @@
-﻿using SimpleInjector;
+﻿using Backend.CrossCutting.Clients.Http;
+using SimpleInjector;
 using System.Net.Http;
-using Backend.CrossCutting.Clients.Http;
 
 namespace Backend.Ioc.Injectors
 {

@@ -1,62 +1,56 @@
-﻿using System.Net.Http;
-using System.Net;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using System;
-using System.Configuration;
-using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace Backend.CrossCutting.Clients.Http
+namespace Backend.CrossCutting.Clients.Http;
+
+public class HttpClientConnection : IHttpClientConnection
 {
-    public class HttpClientConnection : IHttpClientConnection
+    protected HttpClient HttpClient { get; private set; }
+
+    public HttpClientConnection(HttpClient httpClient)
     {
-        protected HttpClient HttpClient { get; private set; }
+        HttpClient = httpClient;
+    }
 
-        public HttpClientConnection(HttpClient httpClient)
+    public async Task<T> GetAsync<T>(string url) where T : class
+    {
+        try
         {
-            HttpClient = httpClient;
-        }
-
-        public async Task<T> GetAsync<T>(string url) where T : class
-        {
-            try
+            using (var response = await HttpClient.GetAsync(url))
             {
-                HttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["BaseAddress"]);
+                var responseString = await response.Content.ReadAsStringAsync();
 
-                HttpClient.Timeout = TimeSpan.FromMinutes(2);
-
-                using (var response = await HttpClient.GetAsync(url))
+                if (response.StatusCode >= HttpStatusCode.BadRequest)
                 {
-                    var responseString = await response.Content.ReadAsStringAsync();
-
-                    if (response.StatusCode >= HttpStatusCode.BadRequest)
-                    {
-                        return null;
-                    }
-
-                    return JsonConvert.DeserializeObject<T>(responseString);
+                    return null;
                 }
-            }
-            catch
-            {
-                return null;
+
+                return JsonConvert.DeserializeObject<T>(responseString);
             }
         }
-
-        public async Task<T> GetAsync<T>(string url, string resource = "", string query = "", string scheme = "", string parameter = "") where T : class
+        catch (Exception ex)
         {
-            var completedUrl = url.EndsWith("/") ? url : $"{url}/";
-
-            if (!string.IsNullOrWhiteSpace(resource))
-            {
-                completedUrl = $"{completedUrl}{resource}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(query))
-            {
-                completedUrl = $"{completedUrl}{query}";
-            }
-
-            return await GetAsync<T>(completedUrl);
+            return null;
         }
+    }
+
+    public async Task<T> GetAsync<T>(string url, string resource = "", string query = "") where T : class
+    {
+        var completedUrl = url.EndsWith("/") ? url : $"{url}/";
+
+        if (!string.IsNullOrWhiteSpace(resource))
+        {
+            completedUrl = $"{completedUrl}{resource}";
+        }
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            completedUrl = $"{completedUrl}{query}";
+        }
+
+        return await GetAsync<T>(completedUrl);
     }
 }
