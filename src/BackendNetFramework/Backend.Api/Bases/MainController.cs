@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Backend.Application.Configurations;
 using FluentValidation.Results;
 using Newtonsoft.Json;
 
@@ -29,9 +30,26 @@ namespace Backend.Api.Bases
             }));
         }
 
+        protected IHttpActionResult CustomResponse(CustomValidationResult customValidationResult)
+        {
+            if (customValidationResult.HasErrors())
+            {
+                AdicionarErros(customValidationResult);
+                return CustomResponse();
+            }
+
+            return CustomResponse(customValidationResult?.Data);
+        }
+
         protected IHttpActionResult CustomResponseError(ModelStateDictionary modelState)
         {
             if (!modelState.IsValid) AdicionarErros(modelState);
+            return CustomResponse();
+        }
+
+        protected IHttpActionResult CustomResponseError(ValidationResult validationResult)
+        {
+            AdicionarErros(validationResult);
             return CustomResponse();
         }
 
@@ -43,6 +61,16 @@ namespace Backend.Api.Bases
         private void AdicionarErroProcessamento(string erro)
         {
             Erros.Add(erro);
+        }
+
+        private void AdicionarErros(CustomValidationResult validationResult)
+        {
+            var erros = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+
+            foreach (var erro in erros)
+            {
+                AdicionarErroProcessamento(erro);
+            }
         }
 
         private void AdicionarErros(ValidationResult validationResult)

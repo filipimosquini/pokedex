@@ -151,6 +151,14 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Backend.Application\Backend.Application.csproj">
+      <Project>{715546FB-150A-4A08-85B2-CC7A043CCF6F}</Project>
+      <Name>Backend.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj">
+      <Project>{6762C06F-3A5D-4995-A577-7D581FA99EB9}</Project>
+      <Name>Backend.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend.Ioc\Backend.Ioc.csproj">
       <Project>{A262D5F3-0C0E-430A-B8E8-C2128669CA76}</Project>
       <Name>Backend.Ioc</Name>
