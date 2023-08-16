@@ -15,8 +15,11 @@ namespace Backend.Ioc.Configurations
 
             container
                 .AddHttpClientInjector()
+                .AddGatewaysInjector()
                 .AddValidationsInjector()
-                .AddRepositoriesInjector();
+                .AddRepositoriesInjector()
+                .AddServicesInjector()
+                .AddApplicationServicesInjector();
 
             container.Verify();
 

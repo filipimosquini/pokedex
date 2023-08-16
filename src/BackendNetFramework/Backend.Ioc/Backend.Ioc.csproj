@@ -64,8 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\ContainerResolver.cs" />
+    <Compile Include="Injectors\ApplicationServiceInjector.cs" />
+    <Compile Include="Injectors\GatewayInjector.cs" />
     <Compile Include="Injectors\HttpClientInjector.cs" />
     <Compile Include="Injectors\RepositoryInjector.cs" />
+    <Compile Include="Injectors\ServiceInjector.cs" />
     <Compile Include="Injectors\ValidationInjector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,9 +76,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Backend.Application\Backend.Application.csproj">
+      <Project>{715546FB-150A-4A08-85B2-CC7A043CCF6F}</Project>
+      <Name>Backend.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend.CrossCutting\Backend.CrossCutting.csproj">
       <Project>{4D77AABE-E6AE-4128-B2FA-FE300F8B103F}</Project>
       <Name>Backend.CrossCutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj">
+      <Project>{6762C06F-3A5D-4995-A577-7D581FA99EB9}</Project>
+      <Name>Backend.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
