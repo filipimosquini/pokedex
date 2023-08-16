@@ -1,6 +1,6 @@
 ﻿using Backend.Api.Bases;
 using Backend.Application.Configurations;
-using Backend.Application.Validators.MestresPokemon;
+using Backend.Application.Validators;
 using Backend.Domain.ApplicationServices.MestresPokemons;
 using Backend.Domain.AppplicationServices.MestresPokemons.Requests;
 using Backend.Domain.Models;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Api.Controllers;
 
 [ApiController]
-[Route("mestres")]
+[Route("mestres-pokemons")]
 public class MestrePokemonController : MainController
 {
     private readonly IMestrePokemonApplicationService _applicationService;
@@ -33,7 +33,7 @@ public class MestrePokemonController : MainController
         if (!ModelState.IsValid)
         {
             return CustomResponseError(ModelState);
-        }
+        } 
 
         var validateResult = _adicionarMestrePokemonRequestValidator.Validate(request);
         if (validateResult.IsValid)
@@ -71,7 +71,7 @@ public class MestrePokemonController : MainController
         return Ok(await _applicationService.ListarAsync(request));
     }
 
-    [HttpGet("{:id}")]
+    [HttpGet("{id}")]
     [ProducesResponseType(typeof(MestrePokemon), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> OberAsync(string id)

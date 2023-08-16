@@ -8,11 +8,16 @@
 
   <ItemGroup>
     <Folder Include="ApplicationServices\MestresPokemons\Responses\" />
+    <Folder Include="ApplicationServices\Pokemons\Responses\" />
     <Folder Include="Bases\ApplicationsServices\" />
     <Folder Include="Bases\Repositories\" />
     <Folder Include="Extensions\" />
     <Folder Include="Services\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

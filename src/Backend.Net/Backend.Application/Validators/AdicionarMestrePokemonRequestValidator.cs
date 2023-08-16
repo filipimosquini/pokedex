@@ -2,16 +2,12 @@
 using Backend.Domain.AppplicationServices.MestresPokemons.Requests;
 using FluentValidation;
 
-namespace Backend.Application.Validators.MestresPokemon;
+namespace Backend.Application.Validators;
 
-public class AtualizarMestrePokemonRequestValidator : BaseAbstractValidator<AtualizarMestrePokemonRequest>
+public class AdicionarMestrePokemonRequestValidator : BaseAbstractValidator<AdicionarMestrePokemonRequest>
 {
-    public AtualizarMestrePokemonRequestValidator()
+    public AdicionarMestrePokemonRequestValidator()
     {
-        RuleFor(x => x.Id)
-            .Must(ValidarStringNulaEVazia).WithMessage("O campo Id é obrigatório")
-            .Must(ValidarGuid).WithMessage("O campo Id é inválido");
-
         RuleFor(x => x.Nome)
             .Must(ValidarStringNulaEVazia).WithMessage("O campo Nome é obrigatório");
 

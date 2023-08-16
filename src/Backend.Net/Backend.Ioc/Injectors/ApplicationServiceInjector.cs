@@ -1,5 +1,4 @@
 ﻿using Backend.Application.AppplicationServices;
-using Backend.Application.AppplicationServices.Pokemons;
 using Backend.Domain.ApplicationServices.MestresPokemons;
 using Backend.Domain.ApplicationServices.Pokemons;
 using Microsoft.Extensions.DependencyInjection;

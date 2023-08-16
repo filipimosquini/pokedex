@@ -1,4 +1,4 @@
-﻿using Backend.Application.Validators.MestresPokemon;
+﻿using Backend.Application.Validators;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Backend.Ioc.Injectors;

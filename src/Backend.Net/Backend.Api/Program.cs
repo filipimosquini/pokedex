@@ -1,4 +1,5 @@
 using Backend.Api.Configurations;
+using Backend.CrossCutting.Sections;
 using Backend.Infra.Configurations;
 using Backend.Ioc.Injectors;
 
@@ -20,7 +21,11 @@ builder.Host.UsingSerilog();
 
 // Add services to the container.
 
+var pokeapiSection = builder.Configuration.GetSection("Pokeapi");
+builder.Services.Configure<Pokeapi>(pokeapiSection);
+
 builder.Services
+    .AddGatewaysInjector()
     .AddDbContextInjector(builder.Configuration)
     .AddRepositoriesInjector()
     .AddServicesInjector()
@@ -31,7 +36,6 @@ builder.Services
     .AddingHttpClient()
     .AddingCors()
     .AddingResponseCompression()
-    .AddAuthorization()
     .AddingSwagger();
 
 builder.Services.AddControllers();

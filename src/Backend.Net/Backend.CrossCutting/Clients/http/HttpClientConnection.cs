@@ -19,8 +19,6 @@ public class HttpClientConnection : IHttpClientConnection
     {
         try
         {
-            HttpClient.Timeout = TimeSpan.FromMinutes(2);
-
             using (var response = await HttpClient.GetAsync(url))
             {
                 var responseString = await response.Content.ReadAsStringAsync();
@@ -43,7 +41,7 @@ public class HttpClientConnection : IHttpClientConnection
         }
     }
 
-    public async Task<T> GetAsync<T>(string url, string resource = "", string query = "", string scheme = "", string parameter = "") where T : class
+    public async Task<T> GetAsync<T>(string url, string resource = "", string query = "") where T : class
     {
         var completedUrl = url.EndsWith("/") ? url : $"{url}/";
 
