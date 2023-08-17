@@ -11,7 +11,6 @@ using System.Web.Http.Description;
 
 namespace Backend.Api.Controllers
 {
-    [Route("pokemons")]
     public class PokemonController : MainController
     {
         private readonly IPokemonApplicationService _applicationService;
@@ -23,7 +22,7 @@ namespace Backend.Api.Controllers
             _capturarPokemonRequestValidator = capturarPokemonRequestValidator;
         }
 
-        [HttpPost]
+        [HttpPost, Route("pokemons")]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> CapturarAsync([FromBody] CapturarPokemonRequest request)
         {
@@ -41,14 +40,14 @@ namespace Backend.Api.Controllers
             return CustomResponseError(validateResult);
         }
 
-        [HttpGet]
+        [HttpGet, Route("pokemons")]
         [ResponseType(typeof(IEnumerable<PokemonResponse>))]
         public async Task<IHttpActionResult> ListarAsync()
             => Ok(await _applicationService.ListarAsync());
 
-        [HttpGet]
+        [HttpGet, Route("pokemons/{id}")]
         [ResponseType(typeof(PokemonResponse))]
-        public async Task<IHttpActionResult> ObterAsync(int pokemonId)
-            => Ok(await _applicationService.ObterAsync(pokemonId));
+        public async Task<IHttpActionResult> ObterAsync(int id)
+            => Ok(await _applicationService.ObterAsync(id));
     }
 }

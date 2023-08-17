@@ -11,7 +11,6 @@ using System.Web.Http.Description;
 
 namespace Backend.Api.Controllers
 {
-    [Route("mestres-pokemons")]
     public class MestrePokemonController : MainController
     {
         private readonly IMestrePokemonApplicationService _applicationService;
@@ -27,7 +26,7 @@ namespace Backend.Api.Controllers
             _atualizarMestrePokemonRequestValidator = atualizarMestrePokemonRequestValidator;
         }
 
-        [HttpPost]
+        [HttpPost, Route("mestres")]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> AdicionarAsync([FromBody] AdicionarMestrePokemonRequest request)
         {
@@ -45,7 +44,7 @@ namespace Backend.Api.Controllers
             return CustomResponseError(validateResult);
         }
 
-        [HttpPut]
+        [HttpPut, Route("mestres")]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> AtualizarAsync([FromBody] AtualizarMestrePokemonRequest request)
         {
@@ -63,14 +62,19 @@ namespace Backend.Api.Controllers
             return CustomResponseError(validateResult);
         }
 
-        [HttpGet]
+        [HttpGet, Route("mestres")]
         [ResponseType(typeof(IEnumerable<MestrePokemonResponse>))]
         public async Task<IHttpActionResult> ListarAsync([FromUri] FiltroMestrePokemonRequest request)
         {
+            if (request is null)
+            {
+                request = new FiltroMestrePokemonRequest();
+            }
+
             return Ok(await _applicationService.ListarAsync(request));
         }
 
-        [HttpGet]
+        [HttpGet, Route("mestres/{id}")]
         [ResponseType(typeof(MestrePokemonResponse))]
         public async Task<IHttpActionResult> OberAsync(string id)
         {
