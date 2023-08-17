@@ -1,4 +1,5 @@
-﻿using Backend.Infra.Contexts;
+﻿using System;
+using Backend.Infra.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
@@ -9,17 +10,26 @@ public static class EFCoreConnectionConfiguration
 {
     public static DbContextOptionsBuilder<PokedexContext> ConfigureBuilder()
     {
-        var connectionString = ConfigurationManager.AppSettings["SqliteConnection"];
-
         var optionsBuilder = new DbContextOptionsBuilder<PokedexContext>();
 
-        var conn = new SqliteConnection(connectionString);
-
-        optionsBuilder.UseSqlite(conn);
+        optionsBuilder.UseSqlite(CriarConnectionString());
 
         SQLitePCL.Batteries.Init();
 
         return optionsBuilder;
+    }
+
+    private static SqliteConnection CriarConnectionString()
+    {
+        var connectionString = ConfigurationManager.AppSettings["SqliteConnection"];
+
+        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory.Replace("Backend.Api\\", string.Empty);
+
+        connectionString = connectionString.Replace("{AppDir}", baseDirectory);
+
+        var connection = new SqliteConnection(connectionString);
+
+        return connection;
     }
 
 }
