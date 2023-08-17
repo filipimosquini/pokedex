@@ -2,7 +2,7 @@
 
 ## Arquitetura
 
-![image](https://github.com/filipimosquini/pokedex/assets/5280221/55ee0dbb-1647-4956-922c-80d94611fb4e)
+![image](https://github.com/filipimosquini/pokedex/assets/5280221/09506f72-9dfe-4180-ad77-4210413bfe88)
 
 A arquitetura do projeto foi pensada com base na arquitetura Onion logo suas camadas são descritas abaixo:
 
