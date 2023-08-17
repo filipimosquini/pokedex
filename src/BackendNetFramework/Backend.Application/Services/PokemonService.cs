@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Backend.CrossCutting.Expressions;
+using Backend.Domain.ApplicationServices.Pokemons.Requests;
 using Backend.Domain.ApplicationServices.Pokemons.Responses;
 using Backend.Domain.Gateways;
 using Backend.Domain.Gateways.DataTransferObjects.EvolucaoPokemon;
+using Backend.Domain.Models;
+using Backend.Domain.Queries.Pokemons;
+using Backend.Domain.Repositories;
 using Backend.Domain.Services;
 
 namespace Backend.Application.Services;
@@ -12,10 +18,29 @@ namespace Backend.Application.Services;
 public class PokemonService : IPokemonService
 {
     private readonly IPokemonGateway _pokemonGateway;
+    private readonly IPokemonRepository _pokemonRepository;
 
-    public PokemonService(IPokemonGateway pokemonGateway)
+    public PokemonService(IPokemonGateway pokemonGateway, IPokemonRepository pokemonRepository)
     {
         _pokemonGateway = pokemonGateway;
+        _pokemonRepository = pokemonRepository;
+    }
+
+    public async Task<IEnumerable<Pokemon>> ListarAsync(FiltroPokemonCapturadoRequest filtros)
+    {
+        Expression<Func<Pokemon, bool>> queryBase = mestrePokemon => 1 == 1;
+
+        if (!string.IsNullOrWhiteSpace(filtros.Nome))
+        {
+            queryBase = queryBase.JoinExpressions(FiltrarPorNomeQuery.Filtrar(filtros.Nome));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filtros.MestrePokemon))
+        {
+            queryBase = queryBase.JoinExpressions(FiltrarPorNomeMestrePokemonQuery.Filtrar(filtros.MestrePokemon));
+        }
+
+        return await _pokemonRepository.ListarAsync(queryBase);
     }
 
     public async Task<IEnumerable<PokemonResponse>> ListarDeFonteExternaAsync()

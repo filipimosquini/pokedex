@@ -65,5 +65,10 @@ public class PokemonApplicationService : BaseApplicationService, IPokemonApplica
 
     public async Task<IEnumerable<PokemonResponse>> ListarAsync()
     => await _pokemonService.ListarDeFonteExternaAsync();
-    
+
+    public async Task<IEnumerable<PokemonCapturadoResponse>> ListarPokemonsCapturadosAsync(FiltroPokemonCapturadoRequest request)
+    {
+        var resultado = await _pokemonService.ListarAsync(request);
+        return resultado.ToResponses();
+    }
 }

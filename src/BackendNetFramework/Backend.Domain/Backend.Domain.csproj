@@ -62,6 +62,8 @@
     <Compile Include="ApplicationServices\MestresPokemons\Responses\MestrePokemonResponse.cs" />
     <Compile Include="ApplicationServices\Pokemons\IPokemonApplicationService.cs" />
     <Compile Include="ApplicationServices\Pokemons\Requests\CapturarPokemonRequest.cs" />
+    <Compile Include="ApplicationServices\Pokemons\Requests\FiltroPokemonCapturadoRequest.cs" />
+    <Compile Include="ApplicationServices\Pokemons\Responses\PokemonCapturadoResponse.cs" />
     <Compile Include="ApplicationServices\Pokemons\Responses\PokemonResponse.cs" />
     <Compile Include="Bases\ApplicationsServices\ICustomValidationResult.cs" />
     <Compile Include="Bases\Models\BaseModel.cs" />
@@ -134,6 +136,8 @@
     <Compile Include="Queries\MestresPokemons\FiltrarPorIdQuery.cs" />
     <Compile Include="Queries\MestresPokemons\FitrarPorNomeQuery.cs" />
     <Compile Include="Queries\Pokemons\FiltrarPorIdQuery.cs" />
+    <Compile Include="Queries\Pokemons\FiltrarPorNomeMestrePokemonQuery.cs" />
+    <Compile Include="Queries\Pokemons\FiltrarPorNomeQuery.cs" />
     <Compile Include="Repositories\IMestrePokemonRepository.cs" />
     <Compile Include="Repositories\IPokemonRepository.cs" />
     <Compile Include="Services\IMestrePokemonService.cs" />

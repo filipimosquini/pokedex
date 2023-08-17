@@ -45,6 +45,18 @@ namespace Backend.Api.Controllers
         public async Task<IHttpActionResult> ListarAsync()
             => Ok(await _applicationService.ListarAsync());
 
+        [HttpGet, Route("pokemons/capturados")]
+        [ResponseType(typeof(IEnumerable<PokemonCapturadoResponse>))]
+        public async Task<IHttpActionResult> ListarCapturadosAsync([FromUri] FiltroPokemonCapturadoRequest request)
+        {
+            if (request is null)
+            {
+                request = new FiltroPokemonCapturadoRequest();
+            }
+
+            return Ok(await _applicationService.ListarPokemonsCapturadosAsync(request));
+        }
+
         [HttpGet, Route("pokemons/{id}")]
         [ResponseType(typeof(PokemonResponse))]
         public async Task<IHttpActionResult> ObterAsync(int id)
