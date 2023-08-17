@@ -31,6 +31,7 @@ Será carregada a tela abaixo
 
 ## Ferramentas e Frameworks
 
+* .Net Framework 4.8.1
 * .Net6
 * EntityFrameworkCore
 * Docker
