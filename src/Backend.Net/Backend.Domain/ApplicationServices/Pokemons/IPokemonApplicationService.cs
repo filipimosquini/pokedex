@@ -6,6 +6,7 @@ namespace Backend.Domain.ApplicationServices.Pokemons;
 public interface IPokemonApplicationService
 {
     Task<ICustomValidationResult> CapturarAsync(CapturarPokemonRequest request);
-    Task<PokemonResponse> ObterAsync(int pokemonId);
     Task<IEnumerable<PokemonResponse>> ListarAsync();
+    Task<IEnumerable<PokemonCapturadoResponse>> ListarPokemonsCapturadosAsync(FiltroPokemonCapturadoRequest request);
+    Task<PokemonResponse> ObterAsync(int pokemonId);
 }

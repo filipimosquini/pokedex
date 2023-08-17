@@ -45,6 +45,12 @@ public class PokemonController : MainController
     public async Task<IActionResult> ListarAsync()
         => Ok(await _applicationService.ListarAsync());
 
+    [HttpGet("capturados")]
+    [ProducesResponseType(typeof(IEnumerable<PokemonCapturadoResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ListarCapturadosAsync([FromQuery] FiltroPokemonCapturadoRequest request)
+        => Ok(await _applicationService.ListarPokemonsCapturadosAsync(request));
+
     [HttpGet("{pokemonId}")]
     [ProducesResponseType(typeof(PokemonResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
