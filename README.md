@@ -27,7 +27,7 @@ Após o término da execução, acesse a URL http://localhost:5000/swagger/index
 
 Será carregada a tela abaixo
 
-![image](https://github.com/filipimosquini/pokedex/assets/5280221/0ee77d7a-7c61-4894-a1eb-7375817d214a)
+![image](https://github.com/filipimosquini/pokedex/assets/5280221/8f6550ac-80f8-4a07-81ed-412e2634e66b)
 
 ## Ferramentas e Frameworks
 
