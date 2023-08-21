@@ -1,5 +1,7 @@
 # Pokedex
 
+O Projeto que simula uma pokedex. O projeto foi feito em duas versões: uma em .NET Framework e a outra em .NET 6 tendo as mesmas regras de negócio mas com o objetivo de mostrar as diferenças de implementação das particularidades entre cada plataforma.
+
 ## Arquitetura
 
 ![image](https://github.com/filipimosquini/pokedex/assets/5280221/09506f72-9dfe-4180-ad77-4210413bfe88)
