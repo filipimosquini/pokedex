@@ -1,6 +1,6 @@
 # Pokedex
 
-O Projeto que simula uma pokedex. O projeto foi feito em duas versões: uma em .NET Framework e a outra em .NET 6 tendo as mesmas regras de negócio mas com o objetivo de mostrar as diferenças de implementação das particularidades entre cada plataforma.
+O Projeto que simula uma pokedex. O projeto foi feito em duas versões: uma em .NET Framework 4.8 e a outra em .NET 6 tendo as mesmas regras de negócio mas com as diferenças de implementação de cada plataforma.
 
 ## Arquitetura
 
